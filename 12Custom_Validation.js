@@ -1,19 +1,3 @@
-const mongoose = require("mongoose");
-
-mongoose
-  .connect("mongodb://localhost/PersonDetail", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true, // this are custom Blindy add this three.
-    // There is one more when we connect to Atlas.
-  })
-  .then(() => {
-    console.log("connection Successfull...");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
 const TutorialSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -22,8 +6,8 @@ const TutorialSchema = new mongoose.Schema({
   },
   age: {
     type: Number,
-    // this value is the value which we going to insert in age.
     validate(value) {
+      // this value is the value which we going to insert in age.
       if (value < 0) {
         throw new Error("Age cannot be Negative");
       }
@@ -36,14 +20,14 @@ const TutorialSchema = new mongoose.Schema({
   },
 });
 
-const Tutorial = new mongoose.model("DurgeshTutorial", TutorialSchema);
+const Tutorial = new mongoose.model("CustomValidation", TutorialSchema);
 
 const createDocumentCustomValidation = async () => {
   try {
     const tuts5 = new Tutorial({
-      name: " kk ",
+      name: "Kim",
       age: 20,
-      phone: 9687318788,
+      phone: 7894566153,
     });
 
     const result = await Tutorial.insertMany([tuts5]);

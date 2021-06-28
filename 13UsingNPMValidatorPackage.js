@@ -1,23 +1,7 @@
-// Using Npm Package for validaton
+// Using Npm Package for validation
 // npm i validator
 
-const mongoose = require("mongoose");
 const validator = require("validator");
-
-mongoose
-  .connect("mongodb://localhost/PersonDetail", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true, // this are custom Blindy add this three.
-    // There is one more when we connect to Atlas.
-  })
-  .then(() => {
-    console.log("connection Successfull...");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
 const TutorialSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -30,7 +14,7 @@ const TutorialSchema = new mongoose.Schema({
     required: true,
     unique: true,
     validate(value) {
-      if (!validator.isEmail(value)) {
+      if (validator.isEmail(value)) {
         throw new Error("Email is Invalid");
       }
     },
@@ -42,15 +26,15 @@ const TutorialSchema = new mongoose.Schema({
   },
 });
 
-const Tutorial = new mongoose.model("DurgeshTutorial", TutorialSchema);
+const Tutorial = new mongoose.model("NpmValidation", TutorialSchema);
 
 const createDocumentCustomValidation = async () => {
   try {
     const tuts5 = new Tutorial({
-      name: "Strivefffr",
+      name: "Striver",
       age: 20,
-      email: "d16@gmail.com",
-      phone: 9687318788,
+      email: "d#",
+      phone: 7412963820,
     });
 
     const result = await Tutorial.insertMany([tuts5]);
