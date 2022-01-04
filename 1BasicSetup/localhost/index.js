@@ -1,13 +1,13 @@
 // ---------------Mongoose Setup -------------------
 
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 mongoose
-  .connect("mongodb://localhost/PersonDetail", {
+  .connect('mongodb://localhost/PersonDetail', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("connection done...");
+    console.log('connection done...');
   })
   .catch((err) => {
     console.log(err);
